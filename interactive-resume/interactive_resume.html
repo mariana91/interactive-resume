@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mariana Hernandez | Technical Support Engineer (AMER)</title>
+  <!-- Typography aligned with Cursor-adjacent stack (Geist). Colors/layout evoke Discourse dark (forum.cursor.com). -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource-variable/geist@5.2.5/index.css">
+  <style>
+    :root {
+      /* Discourse-style dark surfaces (approximation of forum.cursor.com) */
+      --bg: #0b0b0c;
+      --header-bg: #111113;
+      --card: #131316;
+      --elevated: #18181c;
+      --muted: #9b9ba3;
+      --text: #f4f4f5;
+      --accent: #6ea8fe;
+      --accent-hover: #93bfff;
+      --chip: #1c1c21;
+      --ok: #86efac;
+      --border: #2a2a30;
+      --border-subtle: #222228;
+      --radius: 8px;
+      --font: "Geist Variable", "Geist", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: var(--font);
+      font-size: 15px;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+    .site-header {
+      background: var(--header-bg);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .site-header-inner {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 12px 16px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 8px 16px;
+    }
+    .site-title {
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: -0.01em;
+    }
+    .site-meta {
+      font-size: 0.8125rem;
+      color: var(--muted);
+    }
+    .wrap {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 20px 16px 48px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px;
+      margin-bottom: 12px;
+    }
+    h1, h2, h3 { margin: 0 0 8px; }
+    h1 {
+      font-size: 1.65rem;
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+    }
+    /* Section titles: Discourse sidebar / list header vibe */
+    h2 {
+      font-size: 0.6875rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+    .sub {
+      color: var(--muted);
+      margin-bottom: 10px;
+      font-size: 0.9375rem;
+    }
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: 10px 0 0;
+    }
+    .chip {
+      background: var(--chip);
+      border: 1px solid var(--border-subtle);
+      border-radius: 4px;
+      color: var(--text);
+      font-size: 0.8125rem;
+      padding: 4px 8px;
+      font-weight: 500;
+    }
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 8px;
+      margin-top: 8px;
+    }
+    .metric {
+      background: var(--elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius);
+      padding: 10px;
+    }
+    .metric .label { color: var(--muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; }
+    .metric .value { color: var(--ok); font-weight: 600; margin-top: 6px; font-size: 0.875rem; }
+    details {
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius);
+      margin-top: 6px;
+      background: var(--elevated);
+      transition: border-color 0.12s ease, background 0.12s ease;
+    }
+    details:hover {
+      border-color: var(--border);
+      background: #1c1c22;
+    }
+    details + details {
+      margin-top: 6px;
+    }
+    summary {
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.9375rem;
+      padding: 12px 14px;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    summary::-webkit-details-marker { display: none; }
+    summary::after {
+      content: "";
+      flex-shrink: 0;
+      width: 0;
+      height: 0;
+      margin-top: 6px;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 5px solid var(--muted);
+      transition: transform 0.15s ease;
+    }
+    details[open] summary::after {
+      transform: rotate(180deg);
+    }
+    details ul {
+      margin: 0;
+      padding: 0 14px 14px 36px;
+    }
+    ul { margin: 8px 0 4px 18px; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .small { font-size: 0.875rem; color: var(--muted); }
+    .grid-two {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .interests-intro {
+      color: var(--muted);
+      font-size: 0.9375rem;
+      margin: 0 0 14px;
+      max-width: 62ch;
+    }
+    .embed-wrap {
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border-subtle);
+      background: var(--elevated);
+      line-height: 0;
+    }
+    .embed-wrap iframe {
+      display: block;
+      width: 100%;
+      height: 152px;
+      border: 0;
+    }
+    .print-only-playlist {
+      display: none;
+      font-size: 0.875rem;
+      color: var(--muted);
+      margin-top: 10px;
+    }
+    @media (max-width: 760px) {
+      .grid-two { grid-template-columns: 1fr; }
+    }
+    @media print {
+      .site-header { position: static; border-bottom: 1px solid #ddd; background: #fff; }
+      .site-meta { color: #555; }
+      body {
+        background: #fff;
+        color: #111;
+        font-family: ui-sans-serif, system-ui, sans-serif;
+      }
+      .wrap {
+        max-width: 100%;
+        padding: 0;
+      }
+      .card {
+        background: #fff;
+        border: 1px solid #ddd;
+        margin-bottom: 8px;
+        padding: 12px;
+        page-break-inside: avoid;
+      }
+      h2 { color: #555; }
+      .chip {
+        background: #f5f5f5;
+        border: 1px solid #ddd;
+        color: #111;
+      }
+      .metric {
+        background: #f8f8f8;
+        border: 1px solid #ddd;
+      }
+      .metric .value { color: #166534; }
+      a { color: #111; text-decoration: none; }
+      details { border: 1px solid #ddd; background: #fff; }
+      details:not([open]) > *:not(summary) { display: block; }
+      summary::after { border-top-color: #666; }
+      .embed-wrap { display: none; }
+      .print-only-playlist { display: block; color: #555; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header" aria-label="Site">
+    <div class="site-header-inner">
+      <span class="site-title">Resume</span>
+      <span class="site-meta">Mariana Hernandez · Technical Support Engineer - AMER</span>
+    </div>
+  </header>
+  <main class="wrap">
+    <section class="card">
+      <h1>Mariana Hernandez</h1>
+      <div class="sub">Technical Support Engineer - AMER | Austin, Texas (Remote-ready)</div>
+      <div class="small">
+        <a href="mailto:mariana.jhernandez91@gmail.com">mariana.jhernandez91@gmail.com</a> |
+        <a href="https://www.linkedin.com/in/marianahernandez14">LinkedIn</a>
+      </div>
+      <p>
+        Support + engineering hybrid with 9+ years across technical support, automation, and operations.
+        I troubleshoot complex product and integration issues, partner tightly with engineering on bug
+        reproduction and escalation, and build documentation and tooling that improves support quality at scale.
+        Comfortable supporting developer users working in IDE-centric and AI-assisted workflows.
+      </p>
+      <div class="metrics">
+        <div class="metric"><div class="label">Support domain depth</div><div class="value">AR automation + payments</div></div>
+        <div class="metric"><div class="label">Integration focus</div><div class="value">NetSuite, Sage Intacct, QB, Xero</div></div>
+        <div class="metric"><div class="label">Debugging scope</div><div class="value">Frontend, backend, APIs, data model</div></div>
+        <div class="metric"><div class="label">Developer workflow context</div><div class="value">IDE, API, and LLM-adjacent support</div></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Core Skills Matrix</h2>
+      <div class="row">
+        <span class="chip">Technical Support (Tickets + Slack)</span>
+        <span class="chip">Bug Reproduction</span>
+        <span class="chip">Incident Escalation</span>
+        <span class="chip">Enterprise Communication</span>
+        <span class="chip">API Troubleshooting</span>
+        <span class="chip">ERP Integrations</span>
+        <span class="chip">Documentation</span>
+        <span class="chip">Cross-functional Collaboration</span>
+      </div>
+      <div class="row">
+        <span class="chip">Symfony (PHP)</span>
+        <span class="chip">AngularJS</span>
+        <span class="chip">SuiteScript / TypeScript</span>
+        <span class="chip">RESTful APIs</span>
+        <span class="chip">AWS (S3, ECS, Textract)</span>
+        <span class="chip">Redis</span>
+        <span class="chip">Elasticsearch</span>
+        <span class="chip">MySQL</span>
+        <span class="chip">Ruby / Rails</span>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Experience Timeline (Expandable)</h2>
+
+      <details open>
+        <summary>Senior Technical Support Engineer I | Flywire (Invoiced) | Mar 2026 - Present</summary>
+        <ul>
+          <li>Serve as a technical SME for accounts receivable automation workflows across billing, collections, and payments.</li>
+          <li>Diagnose complex issues across AngularJS frontend and Symfony backend services, including API and integration failures.</li>
+          <li>Lead ERP integration troubleshooting for NetSuite, Sage Intacct, QuickBooks, and Xero, including SuiteScript entry points and RESTlets.</li>
+          <li>Partner with engineering to reproduce and document bugs with logs and concrete repro steps, helping speed resolution cycles.</li>
+          <li>Trace data issues across a 300+ table relational schema involving invoice, customer, and payment models.</li>
+          <li>Contribute to internal and external docs to reduce repeat tickets and improve user self-service.</li>
+        </ul>
+      </details>
+
+      <details>
+        <summary>Technical Support Engineer | Flywire / Invoiced | Jul 2021 - Mar 2026</summary>
+        <ul>
+          <li>Owned end-to-end diagnosis and resolution of platform issues across frontend modules and Symfony services.</li>
+          <li>Handled payment processing configuration support and troubleshooting for B2B customers.</li>
+          <li>Escalated high-impact issues with detailed technical context for faster engineering handoffs.</li>
+          <li>Expanded customer-facing and internal knowledge resources to improve support consistency and speed.</li>
+        </ul>
+      </details>
+
+      <details>
+        <summary>Automation Engineer | Cloudsnap | Jan 2020 - Jul 2021</summary>
+        <ul>
+          <li>Built API-driven automations to streamline business processes and reduce repetitive operational work.</li>
+        </ul>
+      </details>
+
+      <details>
+        <summary>Support Engineering & Operations | OwnLocal | Nov 2016 - Nov 2019</summary>
+        <ul>
+          <li>Progressed from Customer Service Representative to Support Engineer to Associate Operations Manager.</li>
+          <li>Troubleshot technical issues in an SEO ad platform and Rails-based applications.</li>
+          <li>Performed bug discovery, escalation, and partner communication across Support, Product, and Engineering.</li>
+          <li>Built Ruby parsers and produced MySQL-based reporting insights.</li>
+          <li>Led support functions and acted as liaison for customer-impacting software concerns.</li>
+        </ul>
+      </details>
+    </section>
+
+    <section class="card grid-two">
+      <div>
+        <h2>Selected Projects & Automations</h2>
+        <ul>
+          <li>ERP integration troubleshooting playbooks for NetSuite and accounting sync workflows.</li>
+          <li>API/log-viewer-based bug triage patterns to improve escalation quality.</li>
+        </ul>
+      </div>
+      <div>
+        <h2>Documentation & Enablement</h2>
+        <ul>
+          <li>Authored internal runbooks and public docs to improve first-response quality.</li>
+          <li>Reduced repeat issue volume through clearer troubleshooting guidance and known-fix paths.</li>
+          <li>Strengthened shared knowledge between support and engineering teams.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Education</h2>
+      <p><strong>University of Texas at Austin</strong> — BBA, Management Information Systems (2009 - 2014)</p>
+    </section>
+
+    <section class="card">
+      <h2>Interests</h2>
+      <p class="interests-intro">
+        Outside of work I recharge with music and art. Here’s a playlist I’ve been enjoying lately—feel free to press play while you read.
+      </p>
+      <div class="row" aria-label="Other interests">
+        <span class="chip">Music</span>
+        <span class="chip">Film &amp; TV</span>
+        <span class="chip">My dog Goose</span>
+      </div>
+      <div class="embed-wrap" style="margin-top: 14px;">
+        <iframe
+          title="Spotify playlist"
+          src="https://open.spotify.com/embed/playlist/1z7r2xWXOoeCHMRDpQEDW7?utm_source=generator&amp;theme=0"
+          width="100%"
+          height="152"
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          loading="lazy"
+        ></iframe>
+      </div>
+      <p class="print-only-playlist">
+        Playlist (open in Spotify):
+        <a href="https://open.spotify.com/playlist/1z7r2xWXOoeCHMRDpQEDW7">open.spotify.com/playlist/1z7r2xWXOoeCHMRDpQEDW7</a>
+      </p>
+    </section>
+  </main>
+</body>
+</html>
