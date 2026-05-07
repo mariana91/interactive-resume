@@ -1,1 +1,19 @@
 .DS_Store
+
+# macOS
+.AppleDouble
+.LSOverride
+Icon?
+._*
+
+# Editors / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs / temp
+*.log
+.tmp/
+tmp/
