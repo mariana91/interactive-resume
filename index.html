@@ -122,21 +122,21 @@
     }
     .metric .label { color: var(--muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; }
     .metric .value { color: var(--ok); font-weight: 600; margin-top: 6px; font-size: 0.875rem; }
-    details {
+    .timeline details {
       border: 1px solid var(--border-subtle);
       border-radius: var(--radius);
       margin-top: 6px;
       background: var(--elevated);
       transition: border-color 0.12s ease, background 0.12s ease;
     }
-    details:hover {
+    .timeline details:hover {
       border-color: var(--border);
       background: #1c1c22;
     }
-    details + details {
+    .timeline details + details {
       margin-top: 6px;
     }
-    summary {
+    .timeline summary {
       cursor: pointer;
       font-weight: 600;
       font-size: 0.9375rem;
@@ -147,8 +147,8 @@
       align-items: flex-start;
       gap: 12px;
     }
-    summary::-webkit-details-marker { display: none; }
-    summary::after {
+    .timeline summary::-webkit-details-marker { display: none; }
+    .timeline summary::after {
       content: "";
       flex-shrink: 0;
       width: 0;
@@ -159,12 +159,127 @@
       border-top: 5px solid var(--muted);
       transition: transform 0.15s ease;
     }
-    details[open] summary::after {
+    .timeline details[open] summary::after {
       transform: rotate(180deg);
     }
-    details ul {
+    .timeline details ul {
       margin: 0;
       padding: 0 14px 14px 36px;
+    }
+
+    /* Interests: full-width accordion for easier scanning/tapping */
+    .interests-accordion {
+      margin-top: 10px;
+      display: grid;
+      gap: 8px;
+    }
+    details.interest {
+      margin: 0;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius);
+      background: var(--elevated);
+      transition: border-color 0.12s ease, background 0.12s ease;
+      width: 100%;
+    }
+    details.interest:hover {
+      border-color: var(--border);
+      background: #1c1c22;
+    }
+    details.interest[open] {
+      border-color: var(--border);
+    }
+    details.interest > summary {
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      font-weight: 600;
+      font-size: 0.9375rem;
+      padding: 12px 14px;
+      color: var(--text);
+      margin: 0;
+    }
+    details.interest > summary::-webkit-details-marker { display: none; }
+    details.interest > summary::after {
+      content: "";
+      flex-shrink: 0;
+      width: 0;
+      height: 0;
+      margin-top: 6px;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 5px solid var(--muted);
+      transition: transform 0.15s ease;
+    }
+    details.interest[open] > summary::after {
+      transform: rotate(180deg);
+    }
+    details.interest > summary:focus {
+      outline: none;
+    }
+    details.interest > summary:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+      border-radius: 2px;
+    }
+    .interest-panel {
+      padding: 0 14px 14px;
+      border-top: 1px solid var(--border-subtle);
+      font-size: 0.9375rem;
+    }
+    .interest-panel > p:first-child {
+      margin-top: 0;
+    }
+    .interest-panel .embed-wrap {
+      margin-top: 10px;
+    }
+    .interest-panel .embed-wrap:first-child {
+      margin-top: 0;
+    }
+    .embed-wrap--youtube {
+      aspect-ratio: 16 / 9;
+      height: auto;
+    }
+    .embed-wrap--youtube iframe {
+      width: 100%;
+      height: 100%;
+      min-height: 0;
+    }
+    .embed-wrap--spotify iframe {
+      height: 152px;
+    }
+    .watch-list {
+      margin: 12px 0 0;
+      padding-left: 1.1rem;
+      color: var(--text);
+      font-size: 0.875rem;
+    }
+    .watch-list li {
+      margin: 4px 0;
+    }
+    .interest-figure {
+      margin: 0;
+    }
+    .interest-figure img {
+      display: block;
+      width: 100%;
+      max-width: 320px;
+      height: auto;
+      border-radius: 10px;
+      border: 1px solid var(--border-subtle);
+    }
+    .interest-figure figcaption {
+      margin-top: 8px;
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+    .print-only-trailers {
+      display: none;
+      font-size: 0.875rem;
+      color: var(--muted);
+      margin-top: 8px;
     }
     ul { margin: 8px 0 4px 18px; }
     a { color: var(--accent); text-decoration: none; }
@@ -191,7 +306,6 @@
     .embed-wrap iframe {
       display: block;
       width: 100%;
-      height: 152px;
       border: 0;
     }
     .print-only-playlist {
@@ -234,11 +348,38 @@
       }
       .metric .value { color: #166534; }
       a { color: #111; text-decoration: none; }
-      details { border: 1px solid #ddd; background: #fff; }
-      details:not([open]) > *:not(summary) { display: block; }
-      summary::after { border-top-color: #666; }
-      .embed-wrap { display: none; }
-      .print-only-playlist { display: block; color: #555; }
+      .timeline details { border: 1px solid #ddd; background: #fff; }
+      .timeline details:not([open]) > *:not(summary) { display: block; }
+      .timeline summary::after { border-top-color: #666; }
+      details.interest > summary::after { border-top-color: #666; }
+      .embed-wrap,
+      details.interest .embed-wrap--youtube iframe {
+        display: none !important;
+      }
+      .print-only-playlist,
+      .print-only-trailers {
+        display: block;
+        color: #555;
+      }
+      details.interest .interest-panel {
+        display: block !important;
+        border-top: 1px solid #ddd;
+      }
+      details.interest {
+        border: 1px solid #ddd;
+        background: #fff;
+        break-inside: avoid;
+      }
+      details.interest[open],
+      details.interest {
+        background: #fff;
+      }
+      details.interest > summary {
+        color: #111;
+      }
+      .interest-panel {
+        border-top-color: #ddd;
+      }
     }
   </style>
 </head>
@@ -296,7 +437,7 @@
       </div>
     </section>
 
-    <section class="card">
+    <section class="card timeline">
       <h2>Experience Timeline (Expandable)</h2>
 
       <details open>
@@ -366,26 +507,75 @@
     <section class="card">
       <h2>Interests</h2>
       <p class="interests-intro">
-        Outside of work I recharge with music and art. Here’s a playlist I’ve been enjoying lately, feel free to press play while you read.
+        I recharge with music, stories, and time with my dog. Tap an interest below for a bit more context.
       </p>
-      <div class="row" aria-label="Other interests">
-        <span class="chip">Music</span>
-        <span class="chip">Film &amp; TV</span>
-        <span class="chip">My dog Goose</span>
-      </div>
-      <div class="embed-wrap" style="margin-top: 14px;">
-        <iframe
-          title="Spotify playlist"
-          src="https://open.spotify.com/embed/playlist/1z7r2xWXOoeCHMRDpQEDW7?utm_source=generator&amp;theme=0"
-          width="100%"
-          height="152"
-          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-          loading="lazy"
-        ></iframe>
+      <div class="interests-accordion" aria-label="Other interests">
+        <details class="interest" open>
+          <summary>Music</summary>
+          <div class="interest-panel">
+            <p class="small" style="margin-top:0;">
+              A playlist of songs I like right now. 💃 ✨
+            </p>
+            <div class="embed-wrap embed-wrap--spotify">
+              <iframe
+                title="Spotify playlist: focus and wind-down"
+                src="https://open.spotify.com/embed/playlist/1z7r2xWXOoeCHMRDpQEDW7?utm_source=generator&amp;theme=0"
+                width="100%"
+                height="152"
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy"
+              ></iframe>
+            </div>
+            <p class="small" style="margin-bottom:0;">
+              <a href="https://open.spotify.com/playlist/1z7r2xWXOoeCHMRDpQEDW7">Open in Spotify</a>
+            </p>
+          </div>
+        </details>
+        <details class="interest">
+          <summary>Film &amp; TV</summary>
+          <div class="interest-panel">
+            <p class="small" style="margin-top:0;">
+              Shows and movies I've been watching lately. 🍿 🎥
+            </p>
+            <ul class="watch-list">
+              <li><em>The Zone of Interest</em> (A24)</li>
+              <li><em>Star Wars: Maul – Shadow Lord</em> (Disney+)</li>
+              <li><em>Something Very Bad Is Going to Happen</em> (Netflix)</li>
+            </ul>
+            <div class="embed-wrap embed-wrap--youtube" style="margin-top:10px;">
+              <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/vMc_pWm7G7o?si=t0aKUUK8cLJgIcOt" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+            <div class="embed-wrap embed-wrap--youtube" style="margin-top:10px;">
+              <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/r-vfg3KkV54?si=c9_Cph9kQWyfQj0Z" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+          </div>
+        </details>
+        <details class="interest">
+          <summary>My dog Goose</summary>
+          <div class="interest-panel">
+            <figure class="interest-figure">
+              <figcaption>
+                She communicates through the FluentPet button system. Rat terrier, Russell terrier, and Chihuahua mix. 🐶 💖
+              </figcaption>
+              <img
+                src="images/goose.png"
+                width="480"
+                height="640"
+                alt="Goose, a small black-and-white terrier mix, standing in a backyard next to a freshly dug hole with dirt on her nose."
+              />
+            </figure>
+          </div>
+        </details>
       </div>
       <p class="print-only-playlist">
         Playlist (open in Spotify):
         <a href="https://open.spotify.com/playlist/1z7r2xWXOoeCHMRDpQEDW7">open.spotify.com/playlist/1z7r2xWXOoeCHMRDpQEDW7</a>
+      </p>
+      <p class="print-only-trailers">
+        Videos (open in YouTube):
+        <a href="https://www.youtube.com/watch?v=vMc_pWm7G7o">Video 1</a>
+        ·
+        <a href="https://www.youtube.com/watch?v=r-vfg3KkV54">Video 2</a>
       </p>
     </section>
   </main>
